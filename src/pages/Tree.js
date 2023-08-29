@@ -1,9 +1,11 @@
 import { Box, HStack, VStack, Text } from "@chakra-ui/react";
 import React, { useState, useEffect, useRef } from "react";
-import { Tree as Treee } from "react-d3-tree";
 import Sidebar from "../components/Sidebar";
+import SimulatorWindow from "../components/SimulatorWindow";
+import { TreeNode, COLORS } from "../Util/Utility";
 import "./TreeUtil.css";
 
+// length of link from one level to next
 const DEPTH_FACTOR = 70;
 const OPERATIONS = {
   CONSTRUCT: "construct",
@@ -14,114 +16,6 @@ const OPERATIONS = {
   INORDER: "inorder",
   POSTORDER: "postorder",
 };
-
-const COLORS = {
-  NEW: "green",
-  PATH: "yellow",
-  DEFAULT: "#319795",
-  EXIST: "purple",
-  FOUND: "black",
-  RIGHT_LINK: "#319795",
-  LEFT_LINK: "#e53e3e",
-};
-
-class TreeNode {
-  constructor(name, id) {
-    this.name = name;
-    this.children = [];
-    this.values = {
-      isRoot: false,
-      isNew: true,
-      isCurr: false,
-      isPath: false,
-      parent: null,
-      hasLeftChild: false,
-      hasRightChild: false,
-      id: id ? id : "defaultId",
-      color: COLORS.NEW,
-    };
-  }
-
-  static compare(a, b) {
-    return parseInt(a) - parseInt(b);
-  }
-
-  static clearPath(root) {
-    if (!root) {
-      console.log("updating states");
-      return;
-    }
-
-    root.values.isNew = false;
-    root.values.isPath = false;
-    root.values.color = COLORS.DEFAULT;
-
-    if (root.values.hasLeftChild) {
-      TreeNode.clearPath(root.children[0]);
-    }
-
-    if (root.values.hasRightChild) {
-      TreeNode.clearPath(root.children[root.children.length - 1]);
-    }
-  }
-
-  static inorderTraversal(arrRef, root) {
-    if (!root) {
-      return;
-    }
-
-    if (root.values.hasLeftChild) {
-      TreeNode.inorderTraversal(arrRef, root.children[0]);
-    }
-
-    arrRef.current.push(root);
-
-    if (root.values.hasRightChild) {
-      TreeNode.inorderTraversal(
-        arrRef,
-        root.children[root.children.length - 1]
-      );
-    }
-  }
-
-  static preOrderTraversal(arrRef, root) {
-    if (!root) {
-      return;
-    }
-
-    arrRef.current.push(root);
-
-    if (root.values.hasLeftChild) {
-      TreeNode.preOrderTraversal(arrRef, root.children[0]);
-    }
-
-    if (root.values.hasRightChild) {
-      TreeNode.preOrderTraversal(
-        arrRef,
-        root.children[root.children.length - 1]
-      );
-    }
-  }
-
-  static postOrderTraversal(arrRef, root) {
-    if (!root) {
-      return;
-    }
-
-    if (root.values.hasLeftChild) {
-      TreeNode.postOrderTraversal(arrRef, root.children[0]);
-    }
-
-    if (root.values.hasRightChild) {
-      TreeNode.postOrderTraversal(
-        arrRef,
-        root.children[root.children.length - 1]
-      );
-    }
-
-    arrRef.current.push(root);
-  }
-}
 
 const Info = ({
   newNode,
@@ -220,88 +114,6 @@ const Info = ({
         </Text>
       </HStack>
     </VStack>
-  );
-};
-
-const SimulatorWindow = ({ root, scale, translate, depthFactor }) => {
-  if (!root) {
-    return;
-  }
-
-  console.log(translate);
-
-  // Custom color for node
-  const getCustumColor = (node) => {
-    return node.values.color;
-  };
-
-  // Function to fill custom color to node
-  const renderCustomNodeElement = ({ nodeDatum }) => {
-    let _x = 0.5,
-      _y = -0.1;
-    if (nodeDatum.children.length === 0) {
-      _x = -1;
-      _y = 1.5;
-    }
-
-    return (
-      <g>
-        <circle r={10} fill={`${getCustumColor(nodeDatum)}`} />
-        <text x={10} dx={`${_x}em`} dy={`${_y}em`}>
-          {nodeDatum.name}
-        </text>
-      </g>
-    );
-  };
-
-  // Function to add custum class to links for giving custom styling
-  const getDynamicPathClass = (linkData, orientation) => {
-    const { source, target } = linkData;
-    const par = parseInt(source.data.name);
-    const chi = parseInt(target.data.name);
-    console.log(`par: ${par} and chi: ${chi}`);
-
-    if (isNaN(par) || isNaN(chi)) {
-      return "error-link-style";
-    }
-
-    if (chi >= par) {
-      return "right-child-link";
-    } else {
-      return "left-child-link";
-    }
-  };
-
-  return (
-    <Box
-      p="10"
-      width={"100%"}
-      height={"100%"}
-      boxSizing="border-box"
-      transform={`scale(${scale})`}
-      overflow={"hidden"}
-    >
-      {/* <Box Width={width} margin={"auto"}> */}
-      <Box height={"100%"}>
-        <Treee
-          data={root}
-          orientation="vertical"
-          translate={translate}
-          renderCustomNodeElement={renderCustomNodeElement}
-          pathClassFunc={getDynamicPathClass}
-          zoomable={true}
-          scaleExtent={{ min: 0.1, max: 2 }}
-          nodeSize={{ x: 100, y: 100 }}
-          svgClassName="show-content-inside-tree" // Added to enable overflow, so we can see tree
-          depthFactor={depthFactor}
-          draggable={true}
-          separation={{
-            siblings: 0.5,
-            nonSiblings: 0.5,
-          }}
-        />
-      </Box>
-    </Box>
   );
 };
 

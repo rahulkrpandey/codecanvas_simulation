@@ -1,9 +1,8 @@
 import "./App.css";
 import { useRef, useState } from "react";
-import Node from "./Node";
 import Tree from "./pages/Tree";
 import Home from "./pages/Home";
-import PriorityQueue from "./pages/PriorityQueue";
+import MinHeap from "./pages/MinHeap";
 import Trie from "./pages/Trie";
 import { Box, VStack } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
@@ -12,7 +11,7 @@ function App() {
   console.log(`windows width: ${window.innerWidth}`);
   const fraction = window.innerWidth / 1536;
 
-  const dataStructures = ["binary search tree", "priority queue", "trie"];
+  const dataStructures = ["binary search tree", "min heap", "trie"];
   const [currentDataStructures, setCurrentDataStructures] = useState("home");
 
   let currPage = <Home />;
@@ -21,7 +20,7 @@ function App() {
       currPage = <Tree scale={fraction} />;
       break;
     case dataStructures[1]:
-      currPage = <PriorityQueue />;
+      currPage = <MinHeap scale={fraction} />;
       break;
     case dataStructures[2]:
       currPage = <Trie />;
