@@ -1,0 +1,29 @@
+.red {
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  margin: 20px 20px;
+  border-radius: 50%;
+}
+
+.black {
+  height: 20px;
+  width: 20px;
+  background-color: black;
+  margin: 40px 40px;
+  border-radius: 50%;
+}
+
+.canvas {
+  height: 400px;
+  width: 400px;
+  border: solid black 1px;
+}
+
+.line {
+  height: 100px;
+  border: solid black 2px;
+  position: absolute;
+  margin: 100px;
+  transform: rotate(60deg);
+}

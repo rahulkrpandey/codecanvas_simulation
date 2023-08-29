@@ -1,0 +1,22 @@
+.default-link-style {
+  stroke: #1c4532 !important;
+  stroke-width: 3px;
+}
+.right-child-link {
+  stroke: #319795 !important;
+  stroke-width: 3px;
+}
+
+.left-child-link {
+  stroke: #e53e3e !important;
+  stroke-width: 3px;
+}
+
+.error-link-style {
+  stroke: #e53e3e !important;
+  stroke-width: 3px;
+}
+
+.show-content-inside-tree {
+  overflow: inherit;
+}
