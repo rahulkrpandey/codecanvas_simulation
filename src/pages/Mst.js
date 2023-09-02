@@ -3,6 +3,8 @@ import { Box } from "@chakra-ui/react";
 import { select, line, path } from "d3";
 import "./Mst.css";
 
+// based on kurshkal algorithm
+
 const Mst = () => {
   const svgRef = useRef(null);
   const pathArrayRef = useRef([]);
