@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 import SimulatorWindow from "../components/SimulatorWindow";
 import { TreeNode, COLORS } from "../Util/Utility";
 
-const SPEED = 200;
+const SPEED = 500;
 
 const OPERATIONS = {
   CONSTRUCT: "construct",

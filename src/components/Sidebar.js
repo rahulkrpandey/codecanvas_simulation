@@ -176,7 +176,7 @@ const Sidebar = ({
   info,
 }) => {
   const [inputFromUser, setInputFromUser] = useState([]);
-  const [operation, setOperation] = useState(operations.CONSTRUCT);
+  const [operation, setOperation] = useState(Object.keys(operations)[0]);
   const Simulate = () => {
     let tempInput = [operation, ...inputFromUser];
     simulateFunction(tempInput);
