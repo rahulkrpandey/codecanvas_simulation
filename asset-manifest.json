@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/codecanvas_simulation/static/css/main.b08cfa5a.css",
-    "main.js": "/codecanvas_simulation/static/js/main.bbfffb50.js",
+    "main.js": "/codecanvas_simulation/static/js/main.b00f8e61.js",
     "index.html": "/codecanvas_simulation/index.html",
     "main.b08cfa5a.css.map": "/codecanvas_simulation/static/css/main.b08cfa5a.css.map",
-    "main.bbfffb50.js.map": "/codecanvas_simulation/static/js/main.bbfffb50.js.map"
+    "main.b00f8e61.js.map": "/codecanvas_simulation/static/js/main.b00f8e61.js.map"
   },
   "entrypoints": [
     "static/css/main.b08cfa5a.css",
-    "static/js/main.bbfffb50.js"
+    "static/js/main.b00f8e61.js"
   ]
 }
