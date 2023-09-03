@@ -207,8 +207,9 @@ const Help = ({ toDisable, info }) => {
           bgColor: COMPLEMENT_COLOR,
         }}
         height={"100%"}
+        rightIcon={<InfoIcon boxSize={"5"} />}
       >
-        <InfoIcon boxSize={"5"} />
+        Info
       </Button>
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>

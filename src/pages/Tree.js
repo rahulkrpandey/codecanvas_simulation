@@ -45,7 +45,7 @@ const Info = ({
       p={"4"}
       gap={"2"}
       alignItems={"flex-start"}
-      maxH={'xl'}
+      maxH={"xl"}
       overflow={"scroll"}
       overflowX={"hidden"}
     >
@@ -84,25 +84,26 @@ const Info = ({
         <List spacing={3}>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Construction: Add a new node while maintaining the BST's ordering
-            property. Accepts multiple arguments from input window.
+            <b>Construction:</b> Add a new node while maintaining the BST's
+            ordering property. Accepts multiple arguments from input window.
           </ListItem>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Insertion: Add a new node while maintaining the BST's ordering
-            property. It takes only one argument. If multiple arguments are
-            present in the input window, then it considers only the first one.
+            <b>Insertion:</b> Add a new node while maintaining the BST's
+            ordering property. It takes only one argument. If multiple arguments
+            are present in the input window, then it considers only the first
+            one.
           </ListItem>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Search: Find a specific element efficiently by traversing the tree.
-            It takes only one argument. If multiple arguments are present in the
-            input window, then it considers only the first one.
+            <b>Search:</b> Find a specific element efficiently by traversing the
+            tree. It takes only one argument. If multiple arguments are present
+            in the input window, then it considers only the first one.
           </ListItem>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Deletion: Remove a node while preserving the BST's structure and
-            ordering. It takes only one argument. If multiple arguments are
+            <b>Deletion:</b> Remove a node while preserving the BST's structure
+            and ordering. It takes only one argument. If multiple arguments are
             present in the input window, then it considers only the first one.
           </ListItem>
         </List>
@@ -115,18 +116,19 @@ const Info = ({
         <List spacing={3}>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Inorder: Traverse the left subtree, visit the current node, then
-            traverse the right subtree (produces elements in ascending order).
+            <b>Inorder:</b> Traverse the left subtree, visit the current node,
+            then traverse the right subtree (produces elements in ascending
+            order).
           </ListItem>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Preorder: Visit the current node, traverse the left subtree, then
-            traverse the right subtree.
+            <b>Preorder:</b> Visit the current node, traverse the left subtree,
+            then traverse the right subtree.
           </ListItem>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Postorder: Traverse the left subtree, traverse the right subtree,
-            then visit the current node.
+            <b>Postorder:</b> Traverse the left subtree, traverse the right
+            subtree, then visit the current node.
           </ListItem>
         </List>
 

@@ -17,13 +17,15 @@ const SimulatorWindow = ({ root, scale, translate, depthFactor }) => {
           width={"sm"}
           height={"sm"}
           display={"flex"}
-          alignItems={"center"}
+          alignItems={"flex-start"}
           justifyContent={"center"}
           border={"2px"}
           borderStyle={"dashed"}
           borderRadius={"5px"}
+          flexDirection={"column"}
+          paddingLeft={'20'}
         >
-          <SmallAddIcon boxSize={'10'} color={'gray.700'} />
+          {/* <SmallAddIcon boxSize={'10'} color={'gray.700'} />
           <Text
             as="i"
             fontSize={"2xl"}
@@ -31,6 +33,55 @@ const SimulatorWindow = ({ root, scale, translate, depthFactor }) => {
             fontWeight={"100"}
           >
             simulation output
+          </Text> */}
+          <Text
+            as="i"
+            fontSize={"2xl"}
+            textTransform={"uppercase"}
+            fontWeight={"100"}
+          >
+            Steps
+          </Text>
+          <br />
+          <Text
+            as="i"
+            fontSize={"2xl"}
+            textTransform={"uppercase"}
+            fontWeight={"100"}
+          >
+            1. Adjust Speed
+          </Text>
+          <Text
+            as="i"
+            fontSize={"2xl"}
+            textTransform={"uppercase"}
+            fontWeight={"100"}
+          >
+            2. Select Operation
+          </Text>
+          <Text
+            as="i"
+            fontSize={"2xl"}
+            textTransform={"uppercase"}
+            fontWeight={"100"}
+          >
+            3. Give Input
+          </Text>
+          <Text
+            as="i"
+            fontSize={"2xl"}
+            textTransform={"uppercase"}
+            fontWeight={"100"}
+          >
+            4. Simulate
+          </Text>
+          <Text
+            as="i"
+            fontSize={"2xl"}
+            textTransform={"uppercase"}
+            fontWeight={"100"}
+          >
+            5. Press Info For More Information
           </Text>
         </Box>
       </Box>

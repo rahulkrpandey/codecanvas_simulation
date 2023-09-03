@@ -9,12 +9,9 @@ import {
   List,
 } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
-import Sidebar from "../components/Sidebar";
 import SimulatorWindow from "../components/SimulatorWindow";
 import { TreeNode, COLORS } from "../Util/Utility";
 import Navbar from "../components/Navbar";
-
-const SPEED = 500;
 
 const OPERATIONS = {
   CONSTRUCT: "construct",
@@ -74,27 +71,27 @@ const Info = ({ path, defaultNode }) => {
         <List spacing={3}>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Insertion or Push: Add a new element to the heap while maintaining
-            the Min Heap property. It takes only one argument. If multiple
-            arguments are present in the input window, then it considers only
-            the first one.
+            <b>Insertion or Push:</b> Add a new element to the heap while
+            maintaining the Min Heap property. It takes only one argument. If
+            multiple arguments are present in the input window, then it
+            considers only the first one.
           </ListItem>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Extraction of Minimum or Pop: Retrieve and remove the minimum
+            <b>Extraction of Minimum or Pop:</b> Retrieve and remove the minimum
             element from the heap, which is always the root. It does not take
             any argument.
           </ListItem>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Peek at Minimum: Examine the minimum element without removing it
-            from the heap. Heapify: Rearrange the elements in the heap to
+            <b>Peek at Minimum:</b> Examine the minimum element without removing
+            it from the heap. Heapify: Rearrange the elements in the heap to
             restore the Min Heap property if it's violated.
           </ListItem>
           <ListItem fontSize={"lg"}>
             <ListIcon as={MinusIcon} />
-            Heapify: Rearrange the elements in the heap to restore the Min Heap
-            property if it's violated.
+            <b>Heapify:</b> Rearrange the elements in the heap to restore the
+            Min Heap property if it's violated.
           </ListItem>
         </List>
 

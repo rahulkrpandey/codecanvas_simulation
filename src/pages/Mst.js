@@ -16,15 +16,14 @@ import { COLORS } from "../Util/Utility";
 
 const TapOnScreenText = ({ x, y }) => {
   const borderWidth = 500; // Border width and height
-  const textContent = "Tap on Screen"; // Text content
-  const fontSize = 36; // Font size
+  const textContent = "Tap on Screen To Add Nodes In MST."; // Text content
+  const fontSize = 24; // Font size
   const borderRadius = 5; // Border radius
   const borderColor = "black"; // Border color
   const dashArray = "5"; // Dashed style (5px dashes)
 
   return (
     <svg
-      className="tap-on-screen"
       width={borderWidth}
       height={borderWidth}
       x={x / 2 - borderWidth / 2}
@@ -54,7 +53,18 @@ const TapOnScreenText = ({ x, y }) => {
         textAnchor="middle"
         alignmentBaseline="middle"
       >
-        {textContent}
+        <tspan x="50%" dy="">
+          {textContent}
+        </tspan>
+        <tspan x="50%" dy="1.5em">
+          Note: The weight of the edge between nodes
+        </tspan>
+        <tspan x="50%" dy="1.5em">
+          is considered as the Euclidean distance
+        </tspan>
+        <tspan x="50%" dy="1.5em">
+          between nodes
+        </tspan>
       </text>
     </svg>
   );
@@ -123,8 +133,8 @@ const Info = ({ node, link }) => {
           the MST adapts in real-time. Removing nodes is just as simple with a
           click.
           <br />
-          The weight of the nodes is defined as the Euclidean distance between
-          the nodes of that edge.
+          <b>Note: The weight of the nodes is defined as the Euclidean distance between
+          the nodes of that edge.</b>
         </Text>
 
         <br />
