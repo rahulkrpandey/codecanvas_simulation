@@ -1,8 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { HStack, VStack, Box, Text } from "@chakra-ui/react";
+import {
+  HStack,
+  VStack,
+  Box,
+  Text,
+  ListItem,
+  ListIcon,
+  List,
+} from "@chakra-ui/react";
+import { MinusIcon } from "@chakra-ui/icons";
 import Sidebar from "../components/Sidebar";
 import SimulatorWindow from "../components/SimulatorWindow";
 import { TreeNode, COLORS } from "../Util/Utility";
+import Navbar from "../components/Navbar";
 
 const SPEED = 500;
 
@@ -18,42 +28,136 @@ const Info = ({ path, defaultNode }) => {
     <VStack
       bgColor={"inherit"}
       border={"2px"}
+      mx={"2"}
       borderRadius={"md"}
-      p={"2"}
+      p={"4"}
       gap={"2"}
       alignItems={"flex-start"}
+      maxH={"xl"}
+      overflow={"scroll"}
+      overflowX={"hidden"}
     >
-      <HStack gap={"5"} overflow={"clip"}>
-        <Box
-          h={"5"}
-          minW={"5"}
-          borderRadius={"50%"}
-          border="2px"
-          bgColor={path}
-        />
-        <Text color="#fff" textTransform={"capitalize"}>
-          nodes part of traversal or path
+      <Box>
+        <Text fontSize={"xl"} fontWeight={"500"} as={"i"}>
+          Min Heap
         </Text>
-      </HStack>
+        <Text fontSize={"lg"}>
+          A Min Heap is a specialized binary tree-based data structure that
+          maintains a specific ordering property among its elements. In a Min
+          Heap:
+        </Text>
+        <List spacing={3}>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Each node has at most two child nodes: a left child and a right
+            child.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            The value of each node is less than or equal to the values of its
+            child nodes, ensuring that the minimum element is always at the
+            root.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            This unique property makes Min Heaps especially useful for finding
+            and managing the minimum element efficiently, among other
+            applications.
+          </ListItem>
+        </List>
 
-      <HStack gap={"5"} overflow={"clip"}>
-        <Box
-          h={"5"}
-          minW={"5"}
-          borderRadius={"50%"}
-          border="2px"
-          bgColor={defaultNode}
-        />
-        <Text color="#fff" textTransform={"capitalize"}>
-          default color of node
+        <br />
+
+        <Text fontSize={"xl"} fontWeight={"500"} as={"i"}>
+          Operations on a Min Heap
         </Text>
-      </HStack>
+        <List spacing={3}>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Insertion or Push: Add a new element to the heap while maintaining
+            the Min Heap property. It takes only one argument. If multiple
+            arguments are present in the input window, then it considers only
+            the first one.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Extraction of Minimum or Pop: Retrieve and remove the minimum
+            element from the heap, which is always the root. It does not take
+            any argument.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Peek at Minimum: Examine the minimum element without removing it
+            from the heap. Heapify: Rearrange the elements in the heap to
+            restore the Min Heap property if it's violated.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Heapify: Rearrange the elements in the heap to restore the Min Heap
+            property if it's violated.
+          </ListItem>
+        </List>
+
+        <br />
+
+        <Text
+          textTransform={"capitalize"}
+          fontSize={"xl"}
+          fontWeight={"500"}
+          as="i"
+        >
+          about colors of nodes and links
+        </Text>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box
+            h={"5"}
+            minW={"5"}
+            borderRadius={"50%"}
+            border="2px"
+            bgColor={path}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            nodes part of traversal or path
+          </Text>
+        </HStack>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box
+            h={"5"}
+            minW={"5"}
+            borderRadius={"50%"}
+            border="2px"
+            bgColor={defaultNode}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            default color of node
+          </Text>
+        </HStack>
+      </Box>
     </VStack>
   );
 };
 
-const MinHeap = ({ scale }) => {
+const MinHeap = ({
+  scale,
+  dataStructures,
+  currentDataStructures,
+  setCurrentDataStructures,
+  speeds,
+}) => {
   const [spinning, setSpinning] = useState(false);
+  const [speed, setSpeed] = useState(speeds.FAST);
   const parentRef = useRef(null);
   const [root, setRoot] = useState(null);
 
@@ -326,25 +430,30 @@ const MinHeap = ({ scale }) => {
     console.log(input.current);
   };
 
+  const clearSimulation = () => {
+    input.current = [];
+    ptr1.current = ptr2.current = null;
+    minHeapArray.current = ["FILLER_ELEMENT"];
+    setSpinning(false);
+    setRoot(null);
+  };
+
   useEffect(() => {
-    const timeOut = setTimeout(
-      () => {
-        console.log("in use effect");
-        console.log(input.current);
-        console.log(ptr1.current);
-        console.log(ptr2.current);
-        if (
-          input.current.length === 1 &&
-          (ptr1.current !== null || ptr2.current !== null)
-        ) {
-          update();
-        } else {
-          setSpinning(false);
-          input.current = [];
-        }
-      },
-      SPEED ? SPEED : 200
-    );
+    const timeOut = setTimeout(() => {
+      console.log("in use effect");
+      console.log(input.current);
+      console.log(ptr1.current);
+      console.log(ptr2.current);
+      if (
+        input.current.length === 1 &&
+        (ptr1.current !== null || ptr2.current !== null)
+      ) {
+        update();
+      } else {
+        setSpinning(false);
+        input.current = [];
+      }
+    }, speed);
 
     return () => {
       clearTimeout(timeOut);
@@ -352,27 +461,32 @@ const MinHeap = ({ scale }) => {
   }, [root, setRoot, update]);
 
   return (
-    <HStack h={"93vh"} boxSizing="border-box" gap={"0"}>
-      <Sidebar
-        algoName={"min heap"}
+    <VStack w={"100vw"} boxSizing="border-box" h={"100vh"} ref={parentRef}>
+      <Navbar
+        dataStructures={dataStructures}
+        setCurrentDataStructures={setCurrentDataStructures}
+        currentDataStructures={currentDataStructures}
+        showInputSection={true}
         operations={OPERATIONS}
         simulateFunction={simulateFunction}
         spinning={spinning}
-        info={<Info path={COLORS.PATH} defaultNode={COLORS.DEFAULT} />}
+        speed={speed}
+        setSpeed={setSpeed}
+        speeds={speeds}
+        clearSimulation={clearSimulation}
+        info={<Info defaultNode={COLORS.DEFAULT} path={COLORS.PATH} />}
       />
-      <VStack w={"85vw"} boxSizing="border-box" h={"100%"} ref={parentRef}>
-        // Simulator window
-        <SimulatorWindow
-          root={root}
-          depthFactor={DEPTH_FACTOR}
-          scale={scale}
-          translate={{
-            x: parentRef.current?.clientWidth / 2,
-            y: 25,
-          }}
-        />
-      </VStack>
-    </HStack>
+      // Simulator window
+      <SimulatorWindow
+        root={root}
+        depthFactor={DEPTH_FACTOR}
+        scale={scale}
+        translate={{
+          x: parentRef.current?.clientWidth / 2,
+          y: 25,
+        }}
+      />
+    </VStack>
   );
 };
 

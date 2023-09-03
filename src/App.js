@@ -11,33 +11,66 @@ function App() {
   console.log(`windows width: ${window.innerWidth}`);
   const fraction = window.innerWidth / 1536;
 
-  const dataStructures = ["binary search tree", "min heap", "mst"];
+  const dataStructures = ["home", "binary search tree", "min heap", "minimum spanning tree"];
   const [currentDataStructures, setCurrentDataStructures] = useState("home");
+  const SPEED = {
+    SLOW: 500,
+    MEDIUM: 300,
+    FAST: 100,
+  };
 
   console.log(currentDataStructures);
   let currPage = <Home />;
   switch (currentDataStructures) {
-    case dataStructures[0]:
-      currPage = <Tree scale={fraction} />;
-      break;
     case dataStructures[1]:
-      currPage = <MinHeap scale={fraction} />;
+      currPage = (
+        <Tree
+          scale={fraction}
+          dataStructures={dataStructures}
+          setCurrentDataStructures={setCurrentDataStructures}
+          currentDataStructures={currentDataStructures}
+          speeds={SPEED}
+        />
+      );
       break;
     case dataStructures[2]:
-      currPage = <Mst />;
+      currPage = (
+        <MinHeap
+          scale={fraction}
+          dataStructures={dataStructures}
+          setCurrentDataStructures={setCurrentDataStructures}
+          currentDataStructures={currentDataStructures}
+          speeds={SPEED}
+        />
+      );
+      break;
+    case dataStructures[3]:
+      currPage = (
+        <Mst
+          dataStructures={dataStructures}
+          setCurrentDataStructures={setCurrentDataStructures}
+          currentDataStructures={currentDataStructures}
+        />
+      );
       break;
     default:
-      currPage = <Home />;
+      currPage = (
+        <Home
+          dataStructures={dataStructures}
+          setCurrentDataStructures={setCurrentDataStructures}
+          currentDataStructures={currentDataStructures}
+        />
+      );
       break;
   }
 
   return (
     <VStack boxSizing="border-box" gap={"0"}>
-      <Navbar
+      {/* <Navbar
         dataStructures={dataStructures}
         setCurrentDataStructures={setCurrentDataStructures}
         currentDataStructures={currentDataStructures}
-      />
+      /> */}
       {currPage}
     </VStack>
   );

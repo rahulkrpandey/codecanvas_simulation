@@ -1,9 +1,12 @@
 .svg {
-    background-color: #f0f0f0;
-    height: 100%;
-    width: 100%;
+  background-color: #f0f0f0;
+  height: 100%;
+  width: 100%;
 }
 
 .svg circle:hover {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.tap-on-screen {
 }

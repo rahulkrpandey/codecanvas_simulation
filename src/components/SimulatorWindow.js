@@ -1,10 +1,40 @@
 import React from "react";
 import { Tree as Treee } from "react-d3-tree";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
+import { SmallAddIcon } from "@chakra-ui/icons";
 
 const SimulatorWindow = ({ root, scale, translate, depthFactor }) => {
   if (!root) {
-    return;
+    return (
+      <Box
+        width={"100%"}
+        height={"100%"}
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Box
+          width={"sm"}
+          height={"sm"}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          border={"2px"}
+          borderStyle={"dashed"}
+          borderRadius={"5px"}
+        >
+          <SmallAddIcon boxSize={'10'} color={'gray.700'} />
+          <Text
+            as="i"
+            fontSize={"2xl"}
+            textTransform={"uppercase"}
+            fontWeight={"100"}
+          >
+            simulation output
+          </Text>
+        </Box>
+      </Box>
+    );
   }
 
   console.log(translate);

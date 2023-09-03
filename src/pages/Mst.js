@@ -1,14 +1,192 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  VStack,
+  Text,
+  List,
+  ListIcon,
+  ListItem,
+} from "@chakra-ui/react";
+import { MinusIcon } from "@chakra-ui/icons";
 import { select, line, path } from "d3";
 import "./Mst.css";
+import Navbar from "../components/Navbar";
+import { COLORS } from "../Util/Utility";
+
+const TapOnScreenText = ({ x, y }) => {
+  const borderWidth = 500; // Border width and height
+  const textContent = "Tap on Screen"; // Text content
+  const fontSize = 36; // Font size
+  const borderRadius = 5; // Border radius
+  const borderColor = "black"; // Border color
+  const dashArray = "5"; // Dashed style (5px dashes)
+
+  return (
+    <svg
+      className="tap-on-screen"
+      width={borderWidth}
+      height={borderWidth}
+      x={x / 2 - borderWidth / 2}
+      y={y / 2 - borderWidth / 2}
+    >
+      {/* Background rectangle with border */}
+      <rect
+        x="0"
+        y="0"
+        width={borderWidth}
+        height={borderWidth}
+        rx={borderRadius}
+        ry={borderRadius}
+        fill="transparent"
+        stroke={borderColor}
+        strokeWidth={2}
+        strokeDasharray={dashArray}
+      />
+
+      {/* Text */}
+      <text
+        x="50%"
+        y="50%"
+        fill="black"
+        fontSize={fontSize}
+        fontWeight={"100"}
+        textAnchor="middle"
+        alignmentBaseline="middle"
+      >
+        {textContent}
+      </text>
+    </svg>
+  );
+};
 
 // based on kurshkal algorithm
+const Info = ({ node, link }) => {
+  return (
+    <VStack
+      bgColor={"inherit"}
+      border={"2px"}
+      mx={"2"}
+      borderRadius={"md"}
+      p={"4"}
+      gap={"2"}
+      alignItems={"flex-start"}
+      maxH={"xl"}
+      overflow={"scroll"}
+      overflowX={"hidden"}
+    >
+      <Box>
+        <Text fontSize={"xl"} fontWeight={"500"} as={"i"}>
+          Minimum Spanning Tree (Kruskal's Algorithm)
+        </Text>
+        <Text fontSize={"lg"}>
+          A Minimum Spanning Tree (MST) is a fundamental concept in graph theory
+          and network design. It represents a subset of edges in an undirected,
+          connected graph that connects all vertices while minimizing the total
+          edge weight. Kruskal's algorithm is one of the popular methods to find
+          the Minimum Spanning Tree efficiently. Here's an overview:
+        </Text>
 
-const Mst = () => {
+        <br />
+
+        <Text fontSize={"xl"} fontWeight={"500"} as={"i"}>
+          Key Properties and Uses:
+        </Text>
+        <List spacing={3}>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Kruskal's algorithm is greedy, as it always chooses the smallest
+            available edge. This property ensures that it finds the MST with the
+            minimum total edge weight.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Minimum Spanning Trees have various practical applications, such as
+            designing efficient network layouts (e.g., connecting cities with
+            minimum road construction cost), ensuring efficient communication in
+            computer networks, and optimizing circuit design in electronic
+            engineering.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Kruskal's algorithm is relatively straightforward to implement and
+            is suitable for sparse graphs with a large number of edges.
+          </ListItem>
+        </List>
+
+        <br />
+        <Text fontSize={"xl"} fontWeight={"500"} as={"i"}>
+          Interact With Project
+        </Text>
+        <Text fontSize={"lg"}>
+          You can easily add nodes by tapping or right-clicking, and watch as
+          the MST adapts in real-time. Removing nodes is just as simple with a
+          click.
+          <br />
+          The weight of the nodes is defined as the Euclidean distance between
+          the nodes of that edge.
+        </Text>
+
+        <br />
+        <Text
+          textTransform={"capitalize"}
+          fontSize={"xl"}
+          fontWeight={"500"}
+          as="i"
+        >
+          about colors of nodes and links
+        </Text>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box
+            h={"5"}
+            minW={"5"}
+            borderRadius={"50%"}
+            border="2px"
+            bgColor={node}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            color of node
+          </Text>
+        </HStack>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box
+            h={"5"}
+            minW={"5"}
+            borderRadius={"50%"}
+            border="2px"
+            bgColor={link}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            color of link
+          </Text>
+        </HStack>
+      </Box>
+    </VStack>
+  );
+};
+
+const Mst = ({
+  dataStructures,
+  currentDataStructures,
+  setCurrentDataStructures,
+}) => {
   const svgRef = useRef(null);
   const pathArrayRef = useRef([]);
   const [data, setData] = useState([]);
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
 
   const union = (a, b) => {
     const A = find(a),
@@ -37,26 +215,15 @@ const Mst = () => {
   };
 
   useEffect(() => {
+    if (x === 0) {
+      setX(svgRef.current.clientWidth);
+      setY(svgRef.current.clientHeight);
+    }
     const svg = select(svgRef.current);
     for (let i = data.length - 1; i >= 0; i--) {
       data[i].par = null;
       data[i].rank = 0;
     }
-
-    const circles = svg
-      .selectAll("circle")
-      .data(data)
-      .join("circle")
-      .attr("r", 10)
-      .attr("cx", (val) => val.x)
-      .attr("cy", (val) => val.y);
-
-    circles.on("click", (val, d) => {
-      pathArrayRef.current = pathArrayRef.current.filter(
-        (item) => val !== item[0] && val !== item[1]
-      );
-      setData((data) => [...data.filter((item) => item !== val)]);
-    });
 
     console.log(data);
     console.log(pathArrayRef.current);
@@ -82,7 +249,26 @@ const Mst = () => {
       .join("path")
       .attr("d", (val) => myLine(val))
       .attr("fill", "none")
-      .attr("stroke", "blue");
+      .attr("stroke", COLORS.LEFT_LINK);
+
+    const circles = svg
+      .selectAll("circle")
+      .data(data)
+      .join("circle")
+      .attr("r", 10)
+      .attr("cx", (val) => val.x)
+      .attr("cy", (val) => val.y)
+      .attr("stroke", "#000")
+      .attr("fill", COLORS.DEFAULT);
+
+    circles.on("click", (val, d) => {
+      pathArrayRef.current = pathArrayRef.current.filter(
+        (item) => val !== item[0] && val !== item[1]
+      );
+      setData((data) => [...data.filter((item) => item !== val)]);
+    });
+
+    circles.raise();
   }, [data]);
 
   const clickHandler = (e) => {
@@ -124,10 +310,27 @@ const Mst = () => {
     setData((data) => [...data, point]);
   };
 
+  const clearSimulation = () => {
+    pathArrayRef.current = [];
+    setData([]);
+  };
+
   return (
-    <Box height={"93vh"} width={"100%"}>
-      <svg className="svg" ref={svgRef} onClick={clickHandler}></svg>
-    </Box>
+    <VStack height={"100vh"} width={"100%"}>
+      <Navbar
+        dataStructures={dataStructures}
+        setCurrentDataStructures={setCurrentDataStructures}
+        currentDataStructures={currentDataStructures}
+        showInputSection={false}
+        clearSimulation={clearSimulation}
+        info={<Info node={COLORS.DEFAULT} link={COLORS.LEFT_LINK} />}
+      />
+      <Box h="93vh" w="100vw">
+        <svg className="svg" ref={svgRef} onClick={clickHandler}>
+          {data.length === 0 && <TapOnScreenText x={x} y={y} />}
+        </svg>
+      </Box>
+    </VStack>
   );
 };
 
