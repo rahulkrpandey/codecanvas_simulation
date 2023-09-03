@@ -1,7 +1,17 @@
-import { Box, HStack, VStack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  VStack,
+  Text,
+  List,
+  ListIcon,
+  ListItem,
+} from "@chakra-ui/react";
+import { MinusIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "../components/Sidebar";
 import SimulatorWindow from "../components/SimulatorWindow";
+import Navbar from "../components/Navbar";
 import { TreeNode, COLORS } from "../Util/Utility";
 import "./TreeUtil.css";
 
@@ -30,96 +40,234 @@ const Info = ({
     <VStack
       bgColor={"inherit"}
       border={"2px"}
+      mx={"2"}
       borderRadius={"md"}
-      p={"2"}
+      p={"4"}
       gap={"2"}
       alignItems={"flex-start"}
+      maxH={'xl'}
+      overflow={"scroll"}
+      overflowX={"hidden"}
     >
-      <HStack gap={"5"} justifyContent={"flex-start"}>
-        <Box
-          h={"5"}
-          minW={"5"}
-          borderRadius={"50%"}
-          border="2px"
-          bgColor={newNode}
-        />
-        <Text color="#fff" textTransform={"capitalize"}>
-          newly created node
+      <Box>
+        <Text fontSize={"xl"} fontWeight={"500"} as={"i"}>
+          Binary Search Tree (BST)
         </Text>
-      </HStack>
+        <Text fontSize={"lg"}>
+          A Binary Search Tree is a hierarchical data structure that organizes
+          elements in a way that facilitates efficient search, insertion, and
+          deletion operations. In a BST:
+        </Text>
+        <List spacing={3}>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Each node has at most two child nodes: a left child and a right
+            child.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Nodes to the left of a parent contain values less than the parent,
+            while nodes to the right contain values greater than the parent.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            This ordering property allows for fast searching: left subtree for
+            smaller values and right subtree for larger values
+          </ListItem>
+        </List>
 
-      <HStack gap={"5"} overflow={"clip"}>
-        <Box
-          h={"5"}
-          minW={"5"}
-          borderRadius={"50%"}
-          border="2px"
-          bgColor={path}
-        />
-        <Text color="#fff" textTransform={"capitalize"}>
-          nodes part of traversal or path
-        </Text>
-      </HStack>
+        <br />
 
-      <HStack gap={"5"} overflow={"clip"}>
-        <Box
-          h={"5"}
-          minW={"5"}
-          borderRadius={"50%"}
-          border="2px"
-          bgColor={defaultNode}
-        />
-        <Text color="#fff" textTransform={"capitalize"}>
-          default color of node
+        <Text fontSize={"xl"} fontWeight={"500"} as={"i"}>
+          Operations on a BST
         </Text>
-      </HStack>
+        <List spacing={3}>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Construction: Add a new node while maintaining the BST's ordering
+            property. Accepts multiple arguments from input window.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Insertion: Add a new node while maintaining the BST's ordering
+            property. It takes only one argument. If multiple arguments are
+            present in the input window, then it considers only the first one.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Search: Find a specific element efficiently by traversing the tree.
+            It takes only one argument. If multiple arguments are present in the
+            input window, then it considers only the first one.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Deletion: Remove a node while preserving the BST's structure and
+            ordering. It takes only one argument. If multiple arguments are
+            present in the input window, then it considers only the first one.
+          </ListItem>
+        </List>
 
-      <HStack gap={"5"} overflow={"clip"}>
-        <Box
-          h={"5"}
-          minW={"5"}
-          borderRadius={"50%"}
-          border="2px"
-          bgColor={exist}
-        />
-        <Text color="#fff" textTransform={"capitalize"}>
-          when node is inserted but it already exist
-        </Text>
-      </HStack>
+        <br />
 
-      <HStack gap={"5"} overflow={"clip"}>
-        <Box
-          h={"5"}
-          minW={"5"}
-          borderRadius={"50%"}
-          border="2px"
-          bgColor={found}
-        />
-        <Text color="#fff" textTransform={"capitalize"}>
-          node is found during search
+        <Text fontSize={"xl"} fontWeight={"500"} as={"i"}>
+          Traversals on a BST
         </Text>
-      </HStack>
+        <List spacing={3}>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Inorder: Traverse the left subtree, visit the current node, then
+            traverse the right subtree (produces elements in ascending order).
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Preorder: Visit the current node, traverse the left subtree, then
+            traverse the right subtree.
+          </ListItem>
+          <ListItem fontSize={"lg"}>
+            <ListIcon as={MinusIcon} />
+            Postorder: Traverse the left subtree, traverse the right subtree,
+            then visit the current node.
+          </ListItem>
+        </List>
 
-      <HStack gap={"5"} overflow={"clip"}>
-        <Box h={"2"} minW={"6"} border="2px" bgColor={leftChild} />
-        <Text color="#fff" textTransform={"capitalize"}>
-          link to left child
-        </Text>
-      </HStack>
+        <br />
 
-      <HStack gap={"5"} overflow={"clip"}>
-        <Box h={"2"} minW={"6"} border="2px" bgColor={rightChild} />
-        <Text color="#fff" textTransform={"capitalize"}>
-          link to right child
+        <Text
+          textTransform={"capitalize"}
+          fontSize={"xl"}
+          fontWeight={"500"}
+          as="i"
+        >
+          about colors of nodes and links
         </Text>
-      </HStack>
+        <HStack gap={"5"} justifyContent={"flex-start"}>
+          <Box
+            h={"5"}
+            minW={"5"}
+            borderRadius={"50%"}
+            border="2px"
+            bgColor={newNode}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            newly created node
+          </Text>
+        </HStack>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box
+            h={"5"}
+            minW={"5"}
+            borderRadius={"50%"}
+            border="2px"
+            bgColor={path}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            nodes part of traversal or path
+          </Text>
+        </HStack>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box
+            h={"5"}
+            minW={"5"}
+            borderRadius={"50%"}
+            border="2px"
+            bgColor={defaultNode}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            default color of node
+          </Text>
+        </HStack>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box
+            h={"5"}
+            minW={"5"}
+            borderRadius={"50%"}
+            border="2px"
+            bgColor={exist}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            when node is inserted but it already exist
+          </Text>
+        </HStack>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box
+            h={"5"}
+            minW={"5"}
+            borderRadius={"50%"}
+            border="2px"
+            bgColor={found}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            node is found during search
+          </Text>
+        </HStack>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box h={"2"} minW={"6"} border="2px" bgColor={leftChild} />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            link to left child
+          </Text>
+        </HStack>
+
+        <HStack gap={"5"} overflow={"clip"}>
+          <Box h={"2"} minW={"6"} border="2px" bgColor={rightChild} />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={"sm"}
+            letterSpacing={"widest"}
+            textTransform={"capitalize"}
+          >
+            link to right child
+          </Text>
+        </HStack>
+      </Box>
     </VStack>
   );
 };
 
-const Tree = ({ scale, speed }) => {
+const Tree = ({
+  scale,
+  speeds,
+  dataStructures,
+  currentDataStructures,
+  setCurrentDataStructures,
+}) => {
   const [root, setRoot] = useState(null);
   const [spinning, setSpinning] = useState(false);
+  const [speed, setSpeed] = useState(speeds.FAST);
   let arr = useRef([]);
   const parentRef = useRef(null);
   let traversal = useRef(null);
@@ -559,19 +707,25 @@ const Tree = ({ scale, speed }) => {
     }
   };
 
+  const clearSimulation = () => {
+    traversal.current = null;
+    currNode.current = null;
+    currIndex.current = 0;
+    arr.current = [];
+    setRoot(null);
+    setSpinning(false);
+  };
+
   useEffect(() => {
-    const timeOut = setTimeout(
-      () => {
-        console.log("inside useeffect");
-        console.log(arr.current);
-        if (arr.current.length >= 1) {
-          updateTree(currNode);
-        } else {
-          setSpinning(false);
-        }
-      },
-      speed ? speed : 200
-    );
+    const timeOut = setTimeout(() => {
+      console.log("inside useeffect");
+      console.log(arr.current);
+      if (arr.current.length >= 1) {
+        updateTree(currNode);
+      } else {
+        setSpinning(false);
+      }
+    }, speed);
 
     return () => clearTimeout(timeOut);
   }, [root, setRoot, updateTree, setSpinning]);
@@ -580,25 +734,38 @@ const Tree = ({ scale, speed }) => {
   console.log(root);
 
   return (
-    <HStack h={"93vh"} boxSizing="border-box" gap={"0"}>
-      <Sidebar
-        algoName={"Binary Search Tree"}
-        operations={OPERATIONS}
-        simulateFunction={simulateFunction}
-        spinning={spinning}
-        info={
-          <Info
-            newNode={COLORS.NEW}
-            path={COLORS.PATH}
-            defaultNode={COLORS.DEFAULT}
-            exist={COLORS.EXIST}
-            found={COLORS.FOUND}
-            leftChild={COLORS.LEFT_LINK}
-            rightChild={COLORS.RIGHT_LINK}
-          />
-        }
-      />
-      <VStack w={"85vw"} boxSizing="border-box" h={"100%"} ref={parentRef}>
+    <HStack h={"100vh"} boxSizing="border-box" gap={"0"}>
+      <VStack
+        w={"100vw"}
+        h="100vh"
+        boxSizing="border-box"
+        gap={"1"}
+        ref={parentRef}
+      >
+        <Navbar
+          dataStructures={dataStructures}
+          setCurrentDataStructures={setCurrentDataStructures}
+          currentDataStructures={currentDataStructures}
+          showInputSection={true}
+          operations={OPERATIONS}
+          simulateFunction={simulateFunction}
+          spinning={spinning}
+          speed={speed}
+          setSpeed={setSpeed}
+          speeds={speeds}
+          clearSimulation={clearSimulation}
+          info={
+            <Info
+              newNode={COLORS.NEW}
+              path={COLORS.PATH}
+              defaultNode={COLORS.DEFAULT}
+              exist={COLORS.EXIST}
+              found={COLORS.FOUND}
+              leftChild={COLORS.LEFT_LINK}
+              rightChild={COLORS.RIGHT_LINK}
+            />
+          }
+        />
         // Simulator window
         <SimulatorWindow
           root={root}
