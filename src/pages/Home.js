@@ -89,7 +89,7 @@ const Home = ({
             <ListIcon as={CheckIcon} color="green.500" />
             Minimum Spanning Tree: Discover the concept of minimum spanning
             trees and their applications in various domains. Follow along as we
-            construct spanning trees using different algorithms, unlocking the
+            construct spanning trees using Kruskal's algorithms, unlocking the
             secrets of efficient network design.
           </ListItem>
         </List>
