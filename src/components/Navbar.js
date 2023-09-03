@@ -441,6 +441,7 @@ const Navbar = ({
           h={"100%"}
           alignSelf={"stretch"}
           isDisabled={!clearSimulation}
+          textTransform={"uppercase"}
         >
           Clear Simulation
         </Button>

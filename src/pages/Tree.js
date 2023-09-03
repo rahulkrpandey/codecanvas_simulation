@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import { MinusIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect, useRef } from "react";
-import Sidebar from "../components/Sidebar";
 import SimulatorWindow from "../components/SimulatorWindow";
 import Navbar from "../components/Navbar";
 import { TreeNode, COLORS } from "../Util/Utility";
